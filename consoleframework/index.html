@@ -17,12 +17,12 @@
     </style>
     <link href="/consoleframework/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 
-    <#--<!-- HTML5 shim, for IE6-8 support of HTML5 elements &ndash;&gt;
+    <!--<!-- HTML5 shim, for IE6-8 support of HTML5 elements &ndash;&gt;
     <!--[if lt IE 9]>
       <script src="../assets/js/html5shiv.js"></script>
     <![endif]&ndash;&gt;-->
 
-    <#--<!-- Fav and touch icons &ndash;&gt;
+    <!--<!-- Fav and touch icons &ndash;&gt;
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
@@ -40,10 +40,26 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="${baseUrl}/">Console Framework</a>
+          <a class="brand" href="/consoleframework">Console Framework</a>
           <div class="nav-collapse collapse">
-            <@module id="menuModule">
-            </@module>
+			<ul class="nav">
+			  <li class="active"><a href="/consoleframework">Home</a></li>
+			  <li><a href="/consoleframework/downloads.html">Downloads</a></li>
+			  <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
+			  <li class="dropdown">
+				<a class="dropdown-toggle" href="#" data-toggle="dropdown">Docs <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+				  <li><a href="/consoleframework/getting-started.html">Getting started</a></li>
+				  <li><a href="/consoleframework/build-from-sources.html">Building from sources</a></li>
+				  <li><a href="/consoleframework/examples.html">Examples</a></li>
+				  <li class="divider"></li>
+				  <li><a href="/consoleframework/xaml.html">XAML reference</a></li>
+				  <li><a href="/consoleframework/binding.html">Data binding reference</a></li>
+				  <li><a href="/consoleframework/layout.html">Layout system reference</a></li>
+				  <li><a href="/consoleframework/custom-controls.html">Writing custom controls</a></li>
+				</ul>
+			  </li>
+			</ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -125,7 +141,7 @@
     <script src="/consoleframework/static/index.js"></script>
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/consoleframework/static/bootstrap/js/bootstrap.js"></script>
-    <#--<script src="../assets/js/bootstrap-transition.js"></script>
+    <!--<script src="../assets/js/bootstrap-transition.js"></script>
     <script src="../assets/js/bootstrap-alert.js"></script>
     <script src="../assets/js/bootstrap-modal.js"></script>
     <script src="../assets/js/bootstrap-dropdown.js"></script>
