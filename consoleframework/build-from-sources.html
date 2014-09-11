@@ -114,15 +114,20 @@
         	<li>ncursesw</li>
         </ul>
         
-        To build <s>libtermkey</s> go to its source code directory and simply run <code>make</code>.
+        <p>
+        To build <u>libtermkey</u> go to its source code directory and simply run <code>make</code>.
+        </p>
         
-        After that you can copy binaries from ./libs into directory with examples. 
+        <p>After that you can copy binaries from ./libs into directory with examples. 
         Or you can use binaries of libtermkey from zip in <b>/native</b> directory.
+        </p>
 
+	<p>
 	Libc and ncursesw are distributed in binaries in vast majority of Linux distros
 	(in Mac OS X you may need to install them manually using <a href="http://www.macports.org/">MacPorts</a>), 
 	so all you need is locate actual binaries and create a symlinks in local directory, 
 	for example, if you are Mac OS X user, you can create next symlinks:
+	</p>
 	
 	<ul>
 		<li>ln -s /usr/lib/libc.dylib libc.so.6</li>
@@ -132,11 +137,6 @@
 
 	<p>Console Framework expects that libraries will be available strictly by this names.
 	If your system already has symlinks libc.so.6 and libncursesw.so.5, you can skip this step.</p>
-
-        <footer>
-            <p>&copy; elwood 2013</p>
-        </footer>
-
     </div>
     <!-- /container -->
 
