@@ -66,77 +66,89 @@
     </div>
 
     <div class="container">
+    	<div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav affix-top">
+          <li class="active"><a href="#windows"><i class="icon-chevron-right"></i> In Windows</a></li>
+          <li class=""><a href="#linux"><i class="icon-chevron-right"></i> In Linux & Mac OS X</a></li>
+        </ul>
+      </div>
+    
             <h1>How to build from sources</h1>
 
         <hr>
         
-        <h2>In Windows</h2>
+        <section id="windows">
+	        <h2>In Windows</h2>
+	        
+	        <h3>Using Visual Studio</h3>
+	        
+	        <ol>
+	        	<li>Open <code>ConsoleFramework.sln</code></li>
+	        	<li>Set <code>Examples</code> project as Startup project</li>
+	        	<li>Select Build</li>
+	        </ol>
+	        
+	        <h3>Using nant</h3>
+	        
+	        <ol>
+	        	<li>Install <a href="http://nant.sourceforge.net/">nant</a></li>
+	        	<li>Run <code>nant build</code> command in working copy directory</li>
+	        </ol>
+        </section>
         
-        <h3>Using Visual Studio</h3>
-        
-        <ol>
-        	<li>Open <code>ConsoleFramework.sln</code></li>
-        	<li>Set <code>Examples</code> project as Startup project</li>
-        	<li>Select Build</li>
-        </ol>
-        
-        <h3>Using nant</h3>
-        
-        <ol>
-        	<li>Install <a href="http://nant.sourceforge.net/">nant</a></li>
-        	<li>Run <code>nant build</code> command in working copy directory</li>
-        </ol>
-        
-        <h2>In Linux/Mac OS X</h2>
-        
-        <h3>Using MonoDevelop</h3>
-        
-        <ol>
-        	<li>Open <code>ConsoleFrameworkMono.sln</code> in MonoDevelop</li>
-        	<li>Set <code>Examples</code> project as Startup project</li>
-        	<li>Select Build</li>
-        </ol>
-        
-        <h3>Using nant</h3>
-        
-        <ol>
-        	<li>Install <a href="http://nant.sourceforge.net/">nant</a> for Mono (installing from sources is preferrable way, because of bug in latest binary release)</li>
-        	<li>Run <code>nant build</code> command in working copy directory</li>
-        </ol>
-        
-        <h3>Native dependencies</h3>
-        
-        <p>In Windows there are no native dependencies. But in Linux and Mac OS X environments you should prepare some native dependencies to be able to execute examples. Dependencies are:</p>
-        
-        <ul>
-        	<li>libtermkey</li>
-        	<li>libc</li>
-        	<li>ncursesw</li>
-        </ul>
-        
-        <p>
-        To build <u>libtermkey</u> go to its source code directory and simply run <code>make</code>.
-        </p>
-        
-        <p>After that you can copy binaries from ./libs into directory with examples. 
-        Or you can use binaries of libtermkey from zip in <b>/native</b> directory.
-        </p>
-
-	<p>
-	Libc and ncursesw are distributed in binaries in vast majority of Linux distros
-	(in Mac OS X you may need to install them manually using <a href="http://www.macports.org/">MacPorts</a>), 
-	so all you need is locate actual binaries and create a symlinks in local directory, 
-	for example, if you are Mac OS X user, you can create next symlinks:
-	</p>
+        <section id="linux">
+	        <h2>In Linux/Mac OS X</h2>
+	        
+	        <h3>Using MonoDevelop</h3>
+	        
+	        <ol>
+	        	<li>Open <code>ConsoleFrameworkMono.sln</code> in MonoDevelop</li>
+	        	<li>Set <code>Examples</code> project as Startup project</li>
+	        	<li>Select Build</li>
+	        </ol>
+	        
+	        <h3>Using nant</h3>
+	        
+	        <ol>
+	        	<li>Install <a href="http://nant.sourceforge.net/">nant</a> for Mono (installing from sources is preferrable way, because of bug in latest binary release)</li>
+	        	<li>Run <code>nant build</code> command in working copy directory</li>
+	        </ol>
+	        
+	        <h3>Native dependencies</h3>
+	        
+	        <p>In Windows there are no native dependencies. But in Linux and Mac OS X environments you should prepare some native dependencies to be able to execute examples. Dependencies are:</p>
+	        
+	        <ul>
+	        	<li>libtermkey</li>
+	        	<li>libc</li>
+	        	<li>ncursesw</li>
+	        </ul>
+	        
+	        <p>
+	        To build <u>libtermkey</u> go to its source code directory and simply run <code>make</code>.
+	        </p>
+	        
+	        <p>After that you can copy binaries from ./libs into directory with examples. 
+	        Or you can use binaries of libtermkey from zip in <b>/native</b> directory.
+	        </p>
 	
-	<ul>
-		<li>ln -s /usr/lib/libc.dylib libc.so.6</li>
-		<li>ln -s ./libncurses.5.4.dylib libncursesw.so.5</li>
-		<li>ln -s ./libtermkey.1.dylib libtermkey.so</li>
-	</ul>
-
-	<p>Console Framework expects that libraries will be available strictly by this names.
-	If your system already has symlinks libc.so.6 and libncursesw.so.5, you can skip this step.</p>
+		<p>
+		Libc and ncursesw are distributed in binaries in vast majority of Linux distros
+		(in Mac OS X you may need to install them manually using <a href="http://www.macports.org/">MacPorts</a>), 
+		so all you need is locate actual binaries and create a symlinks in local directory, 
+		for example, if you are Mac OS X user, you can create next symlinks:
+		</p>
+		
+		<ul>
+			<li>ln -s /usr/lib/libc.dylib libc.so.6</li>
+			<li>ln -s ./libncurses.5.4.dylib libncursesw.so.5</li>
+			<li>ln -s ./libtermkey.1.dylib libtermkey.so</li>
+		</ul>
+	
+		<p>Console Framework expects that libraries will be available strictly by this names.
+		If your system already has symlinks <b>libc.so.6</b> and <b>libncursesw.so.5</b>, you can skip this step.</p>
+	
+	</section>
     </div>
     <!-- /container -->
 
