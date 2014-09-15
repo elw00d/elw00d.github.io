@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Bootstrap, from Twitter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/consoleframework/static/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="/consoleframework/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!--<!-- HTML5 shim, for IE6-8 support of HTML5 elements &ndash;&gt;
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]&ndash;&gt;-->
+
+    <!--<!-- Fav and touch icons &ndash;&gt;
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">-->
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="/consoleframework">Console Framework</a>
+          <div class="nav-collapse collapse">
+			<ul class="nav">
+			  <li class="active"><a href="/consoleframework">Home</a></li>
+			  <li><a href="/consoleframework/downloads.html">Downloads</a></li>
+			  <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
+			  <li class="dropdown">
+				<a class="active dropdown-toggle" href="#" data-toggle="dropdown">Docs <b class="caret"></b></a>
+				<ul class="dropdown-menu">
+				  <li><a href="/consoleframework/getting-started.html">Getting started</a></li>
+				  <li><a href="/consoleframework/build-from-sources.html">Building from sources</a></li>
+				  <li><a href="/consoleframework/examples.html">Examples</a></li>
+				  <li class="divider"></li>
+				  <li><a href="/consoleframework/xaml.html">XAML reference</a></li>
+				  <li><a href="/consoleframework/binding.html">Data binding reference</a></li>
+				  <li><a href="/consoleframework/layout.html">Layout system reference</a></li>
+				  <li><a href="/consoleframework/custom-controls.html">Writing custom controls</a></li>
+				</ul>
+			  </li>
+			</ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+            <h1 id="how-does-xaml-work">How does XAML work</h1>
+<p>XAML is processed using next algorithm. Parser reads elements in sequence and converts them to CLR objects. From root element parser also takes declarations of used namespaces. Object instance is created when parser reaches next xml element (or attribute). Then, if it is attribute, its value is assigned to property of currently configuring object. If it is nested element, its content will be analyzed recursively and corresponding CLR objects will instantiated too. Assignment of constructed object to property of high-level object is executed at the moment of the end of parsing its content, i.e. when parser reaches closing xml tag. At this moment object is fully configured with all nested objects, and will be assigned to property of high-level object (or will be added to collection, if high-level object property in this context is one of supported collections). When parser reaches the end of XAML document, constructed object is returned from method as result value.</p>
+<h2 id="simple-example">Simple example</h2>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">Window</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Window.Content</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">Panel</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">TextBlock</span> <span class="hljs-attribute">Name</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">HorizontalAlignment</span>=<span class="hljs-value">"Center"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">TextBlock</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">Button</span> <span class="hljs-attribute">Name</span>=<span class="hljs-value">"btnMaximize"</span> <span class="hljs-attribute">Caption</span>=<span class="hljs-value">"Maximize"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">Button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">Button</span> <span class="hljs-attribute">Name</span>=<span class="hljs-value">"btnRestore"</span> <span class="hljs-attribute">Caption</span>=<span class="hljs-value">"Restore"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">Button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">Panel</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">Window.Content</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">Window</span>&gt;</span>
+</code></pre><p>What happens when parser processes this XAML document:</p>
+<ul>
+<li><code>Window</code> instantiated, using default constructor</li>
+<li>We got nested element <code>Window.Content</code>. Because it starts from <code>Window</code> (as our currently configuring object), it is definition of property <code>Content</code>. If nested element will not start from <code>Window.</code>, parser will decide that it is content property definition. Content property is special property for each class. By default its name is <code>Content</code>, but can be changed using <code>ContentPropertyAttribute</code> attribute (see WPF documentation for Content properties).</li>
+<li><code>Panel</code> class instantiated (using default constructor)</li>
+<li>We got nested element that doesn't start from <code>Panel.</code>. So, we should determine what content property is defined for <code>Panel</code> class. In our case it will be <code>UIElementCollection Children</code> property. All nested elements (TextBlock and 2 Buttons) will define the value of this property.</li>
+<li><code>TextBlock</code> instance is created (default ctor again). <code>Name</code> and <code>HorizontalAlignment</code> properties are set. Type of <code>Name</code> property is <em>String</em>, so no convertors need. Type of <code>HorizontalAlignment</code> property - <em>enum HorizontalAlignment</em>, and there are we need to use standard String to Enum converter.</li>
+<li><code>TextBlock</code> is created and configured, we reach closing tag, and we should decide what property to use to assign to. Currently configuring object and high-level is <code>Panel</code>, and we are defining its Content property - <code>Children</code>. It implements <code>IList</code>, so created TextBlock will be added to it using <code>Add</code> method.</li>
+<li>Next two buttons are processed like TextBlock</li>
+<li>We have reached <code>&lt;/Panel&gt;</code> closing tag. It means that panel is fully configured and ready to be assigned to property of higher-level object - <code>Window.Content</code>. This property is regular property (not a collection), type is <em>Control</em>, so no conversion need.</li>
+<li>Tag <code>&lt;/Window.Content&gt;</code> tells us about property <code>Window.Content</code> configuration is finished.</li>
+<li>And, tag <code>&lt;/Window&gt;</code> finishes the Window object configuration, and it will be returned as method result.</li>
+</ul>
+<p>So, this XAML is equivalent to next imperative code:</p>
+<pre><code>Window window = new Window()<span class="hljs-comment">;</span>
+Panel panel = new Panel()<span class="hljs-comment">;</span>
+
+TextBlock textBlock = new TextBlock()<span class="hljs-comment">;</span>
+textBlock<span class="hljs-preprocessor">.Name</span> = <span class="hljs-string">"text"</span><span class="hljs-comment">;</span>
+textBlock<span class="hljs-preprocessor">.HorizontalAlignment</span> = HorizontalAlignment<span class="hljs-preprocessor">.Center</span><span class="hljs-comment">;</span>
+panel<span class="hljs-preprocessor">.Children</span><span class="hljs-preprocessor">.Add</span>(textBlock)<span class="hljs-comment">;</span>
+
+Button button1 = new Button()<span class="hljs-comment">;</span>
+button1<span class="hljs-preprocessor">.Name</span> = <span class="hljs-string">"btnMaximize"</span><span class="hljs-comment">;</span>
+button1<span class="hljs-preprocessor">.Caption</span> = <span class="hljs-string">"Maximize"</span><span class="hljs-comment">;</span>
+panel<span class="hljs-preprocessor">.Children</span><span class="hljs-preprocessor">.Add</span>(button1)<span class="hljs-comment">;</span>
+
+Button button2 = new Button()<span class="hljs-comment">;</span>
+button2<span class="hljs-preprocessor">.Name</span> = <span class="hljs-string">"btnRestore"</span><span class="hljs-comment">;</span>
+button2<span class="hljs-preprocessor">.Caption</span> = <span class="hljs-string">"Restore"</span><span class="hljs-comment">;</span>
+panel<span class="hljs-preprocessor">.Children</span><span class="hljs-preprocessor">.Add</span>(button2)<span class="hljs-comment">;</span>
+
+window<span class="hljs-preprocessor">.Content</span> = panel<span class="hljs-comment">;</span>
+</code></pre><h2 id="content-properties-system">Content properties system</h2>
+<p>It is like in WPF. By default Content property name is <code>Content</code>. If you want to change this, you should mark class with <code>ContentPropertyAttribute</code> attribute:</p>
+<pre><code class="lang-csharp">[ContentProperty(<span class="hljs-string">"Controls"</span>)]
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> Grid : Control
+</code></pre>
+<h2 id="how-does-conversion-work-and-how-are-collections-handled">How does conversion work and how are collections handled</h2>
+<p>Build-in type conversions are: strings to numbers, enumerations plus some build-in converters for structs (<code>Thickness</code> - for <code>Margin</code> definition). If you want to use custom converter, you could call it using <code>Convert</code> markup extension:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">Window</span> <span class="hljs-attribute">xmlns:x</span>=<span class="hljs-value">"http://consoleframework.org/xaml.xsd"</span>
+        <span class="hljs-attribute">xmlns:converters</span>=<span class="hljs-value">"clr-namespace:Binding.Converters;assembly=Binding"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Window.Resources</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">string</span> <span class="hljs-attribute">x:Key</span>=<span class="hljs-value">"testItem"</span> <span class="hljs-attribute">x:Id</span>=<span class="hljs-value">"testStr"</span>&gt;</span>5<span class="hljs-tag">&lt;/<span class="hljs-title">string</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">converters:StringToIntegerConverter</span> <span class="hljs-attribute">x:Key</span>=<span class="hljs-value">"2"</span> <span class="hljs-attribute">x:Id</span>=<span class="hljs-value">"str2int"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">converters:StringToIntegerConverter</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">Window.Resources</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">Panel</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">TextBox</span> <span class="hljs-attribute">MaxLenght</span>=<span class="hljs-value">"{Convert Converter={Ref str2int}, Value={Ref testStr}}"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">Panel</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">Window</span>&gt;</span>
+</code></pre>
+<p>Any collection implementing <code>IList</code>, <code>ICollection&lt;T&gt;</code> or <code>IDictionary&lt;string, T&gt;</code> is supported.
+When processing closing tag if property of higher-level object is <code>ICollection&lt;T&gt;</code>, current object will be
+added into collection using <code>Add(T obj)</code> method - instead of search of suitable converter and sequently calling
+setter. So, for collections you are not need setter at all - only getter is necessary.
+<code>IDictionary&lt;string, T&gt;</code> properties handled in similar way. Example:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">Window.Resources</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">item</span> <span class="hljs-attribute">x:Key</span>=<span class="hljs-value">"1"</span>&gt;</span>String<span class="hljs-tag">&lt;/<span class="hljs-title">item</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">item</span> <span class="hljs-attribute">x:Key</span>=<span class="hljs-value">"2"</span>&gt;</span>String 2<span class="hljs-tag">&lt;/<span class="hljs-title">item</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">Window.Resources</span>&gt;</span>
+</code></pre>
+<p>When parser will reach first item closing tag, "String" value will be added to Window.Resources collection.</p>
+<p>In case of using properties with parametrized types, parser knows about T and will try to search suitable converter for object before adding it to collection (if object type differs from T). But if property implements non-parametrized type <code>IList</code>, object will be added without any conversion.</p>
+<h2 id="namespaces">Namespaces</h2>
+<p>When we call parser we pass the set of default namespaces as argument. This is a list of CLR namespaces (path to the namespace + assembly name) that will be used for search of objects (by tag names) and markup extensions declared in XAML and should be instantiated. All namespaces not listed in default namespaces list should be declared in root element of XAML document.</p>
+<p>Example:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">my:Window</span> <span class="hljs-attribute">Name</span>=<span class="hljs-value">"window2"</span> <span class="hljs-attribute">Title</span>=<span class="hljs-value">"Very long window name"</span>
+        <span class="hljs-attribute">xmlns:x</span>=<span class="hljs-value">"http://consoleframework.org/xaml.xsd"</span>
+        <span class="hljs-attribute">xmlns:my</span>=<span class="hljs-value">"clr-namespace:ConsoleFramework.Controls;assembly=ConsoleFramework"</span>
+        <span class="hljs-attribute">xmlns:converters</span>=<span class="hljs-value">"clr-namespace:Binding.Converters;assembly=Binding"</span>
+        <span class="hljs-attribute">xmlns:xaml</span>=<span class="hljs-value">"clr-namespace:ConsoleFramework.Xaml;assembly=ConsoleFramework"</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- Here are all types and markup extensions from all listed namespaces are available to use --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">my:Window</span>&gt;</span>
+</code></pre>
+<h2 id="creating-custom-type-objects-with-ctor-args">Creating custom type objects with ctor args</h2>
+<p>Regular objects designed to use in XAML should have default constructor. If you need to instantiate a class without default constructor, you can create factory class and use them for it. But there are built-in ObjectFactory class that can create objects of any type using constructor with specified args and assign properties dynamically like if we created it using XAML directly. For example, we have class</p>
+<pre><code>class TestClass&lt;T&gt;
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-title">TestClass</span>( <span class="hljs-keyword">int</span> intProperty ) {
+        IntProperty = intProperty;
+    }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> IntProperty { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> StringProperty { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-keyword">public</span> T TProperty { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+</code></pre><p>Using ObjectFactory we can instantiate it in XAML:</p>
+<pre><code class="lang-xml">&lt;<span class="hljs-keyword">object</span> TypeName=<span class="hljs-string">"ConsoleFramework.Xaml.TestClass`1[System.String]"</span>&gt;
+    &lt;<span class="hljs-keyword">int</span> x:Key=<span class="hljs-string">"1"</span>&gt;<span class="hljs-number">66</span>&lt;/<span class="hljs-keyword">int</span>&gt;
+    &lt;<span class="hljs-keyword">string</span> x:Key=<span class="hljs-string">"IntProperty"</span>&gt;<span class="hljs-number">55</span>&lt;/<span class="hljs-keyword">string</span>&gt;
+&lt;/<span class="hljs-keyword">object</span>&gt;
+</code></pre>
+<p><code>TypeName</code> content is resolved using <em>Type.GetType(string assemblyQualifiedName)</em> call, so it is possible to need to specify full type name (with assembly name).</p>
+<p>When we set <code>x:Key</code> to a number <code>1</code> we tell to factory that it is ctor argument with index 1. If <code>x:Key</code> value is not a number, <code>x:Key</code> will be interpreted as property name. You can use all tools available in regular properties definition syntax: text content or any markup extension call.</p>
+<p>How does it work: when we create ObjectFactory instance, we configure its Content property (it is <code>Dictionary&lt;string, object&gt;</code>). But after finishing configuration this object is replaced by factory created object. When you use primitives explicit syntax like <code>&lt;string&gt;str&lt;/string&gt;</code>, it is this mechanism too. All objects implementing <code>IFactory</code> interface will be replaced to factory-created object before assignment to higher-level object property.</p>
+<h2 id="built-in-attributes">Built-in attributes</h2>
+<h5 id="x-id">x:Id</h5>
+<p>Allows to specify unique identifier of any instantiated inside XAML object to allow to reference it later using <code>Ref</code> markup extension.</p>
+<h5 id="x-key">x:Key</h5>
+<p>Specifies key for <code>IDictionary&lt;string, T&gt;</code> collections.</p>
+<p><strong>&lt;p style="color: red"&gt;Important!&lt;/p&gt;</strong></p>
+<p>To use built-in attributes (<code>x:Key</code> or <code>x:Id</code>) you should declare corresponding namespace in root XML element (and it is not CLR namespace, it is just XSD):</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">Window</span> <span class="hljs-attribute">xmlns:x</span>=<span class="hljs-value">"http://consoleframework.org/xaml.xsd"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">Window</span>&gt;</span>
+</code></pre><p><code>x</code> prefix can be changed to any you want.</p>
+<h2 id="built-in-markup-extensions">Built-in markup extensions</h2>
+<h5 id="ref">Ref</h5>
+<p>Allows to get reference to any another object by its <code>x:Id</code>:</p>
+<pre><code><span class="hljs-list">{Ref Ref=myObject}</span>
+или
+<span class="hljs-list">{Ref myObject}</span>
+</code></pre><p>Forward-references are supported too (implementation is like in WPF - using fixup tokens).</p>
+<h5 id="type">Type</h5>
+<p>Allows to get type object (with type <code>Type</code>) by type name:</p>
+<pre><code><span class="hljs-special">{</span>xaml:Type TestProject1.Xaml.TypeExtensionTest.ObjectToCreate<span class="hljs-command">\,</span> TestProject1<span class="hljs-command">\,</span> Version<span class="hljs-command">\=</span>1.0.0.0<span class="hljs-command">\,</span> Culture<span class="hljs-command">\=</span>neutral<span class="hljs-command">\,</span> PublicKeyToken<span class="hljs-command">\=</span>null<span class="hljs-special">}</span>
+</code></pre><h2 id="differences-from-wpf">Differences from WPF</h2>
+<p>If you are familiar with WPF, may be it is more simple to not read whole document, but only next differences:</p>
+<ul>
+<li>No Dependency Properties</li>
+<li>No <code>InitializeComponent()</code> method generated in partial class, all processing runs in runtime instead</li>
+<li>Because no code generation, no event handlers support - neither regular CLR events nor Attached Events</li>
+<li>Because no code generation, no fields generated by <code>Name</code> property</li>
+<li>No support for including dictionaries yet (mb will be added further)</li>
+<li><code>x:Id</code> instead of <code>x:Name</code></li>
+<li>Possible differences in conversions handling, adding to collections - to be sure you should read corresponding document parts</li>
+</ul>
+<h2 id="markup-extension-syntax-differences">Markup extension syntax differences</h2>
+<ul>
+<li>XML-tokens like a <code>&amp;quot;</code> is not supported - if you need to escape anything, use backslash everywhere</li>
+<li>In single quotes you can't write unescaped symbols <code>=,{}</code> - you should escape everything too</li>
+<li>There are only one Data Context object passed to markup extension. In WPF it is resolved using current context because <code>DataContext</code> is Dependency property. So this constraint is because no dependencies properties support and to leave XAML concept simplified, not linked with UI concepts.</li>
+</ul>
+
+    </div>
+    <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/consoleframework/static/index.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="/consoleframework/static/bootstrap/js/bootstrap.js"></script>
+    <!--<script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>-->
+
+  </body>
+</html>
