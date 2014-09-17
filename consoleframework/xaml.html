@@ -1,72 +1,76 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-    <!-- Le styles -->
-    <link href="/consoleframework/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-    <link href="/consoleframework/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <title>Navbar Template for Bootstrap</title>
 
-    <!--<!-- HTML5 shim, for IE6-8 support of HTML5 elements &ndash;&gt;
+    <!-- Bootstrap core CSS -->
+    <link href="/consoleframework/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]&ndash;&gt;-->
-
-    <!--<!-- Fav and touch icons &ndash;&gt;
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/consoleframework">Console Framework</a>
-          <div class="nav-collapse collapse">
-			<ul class="nav">
-			  <li class="active"><a href="/consoleframework">Home</a></li>
-			  <li><a href="/consoleframework/downloads.html">Downloads</a></li>
-			  <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
-			  <li class="dropdown">
-				<a class="active dropdown-toggle" href="#" data-toggle="dropdown">Docs <b class="caret"></b></a>
-				<ul class="dropdown-menu">
+    <div class="container">
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/consoleframework">Console Framework</a>
+          </div>
+		  <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/consoleframework">Home</a></li>
+              <li><a href="/consoleframework/downloads.html">Downloads</a></li>
+              <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
 				  <li><a href="/consoleframework/getting-started.html">Getting started</a></li>
 				  <li><a href="/consoleframework/build-from-sources.html">Building from sources</a></li>
 				  <li><a href="/consoleframework/examples.html">Examples</a></li>
 				  <li class="divider"></li>
+				  <li class="dropdown-header">Reference</li>
 				  <li><a href="/consoleframework/xaml.html">XAML reference</a></li>
 				  <li><a href="/consoleframework/binding.html">Data binding reference</a></li>
 				  <li><a href="/consoleframework/layout.html">Layout system reference</a></li>
 				  <li><a href="/consoleframework/custom-controls.html">Writing custom controls</a></li>
-				</ul>
-			  </li>
-			</ul>
+                </ul>
+              </li>
+            </ul>
+            <!--<ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="./">Default</a></li>
+              <li><a href="../navbar-static-top/">Static top</a></li>
+              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            </ul>-->
           </div><!--/.nav-collapse -->
-        </div>
+        </div><!--/.container-fluid -->
       </div>
-    </div>
 
-    <div class="container">
-            <h1 id="how-does-xaml-work">How does XAML work</h1>
+      <h1 id="how-does-xaml-work">How does XAML work</h1>
 <p>XAML is processed using next algorithm. Parser reads elements in sequence and converts them to CLR objects. From root element parser also takes declarations of used namespaces. Object instance is created when parser reaches next xml element (or attribute). Then, if it is attribute, its value is assigned to property of currently configuring object. If it is nested element, its content will be analyzed recursively and corresponding CLR objects will instantiated too. Assignment of constructed object to property of high-level object is executed at the moment of the end of parsing its content, i.e. when parser reaches closing xml tag. At this moment object is fully configured with all nested objects, and will be assigned to property of high-level object (or will be added to collection, if high-level object property in this context is one of supported collections). When parser reaches the end of XAML document, constructed object is returned from method as result value.</p>
 <h2 id="simple-example">Simple example</h2>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-title">Window</span>&gt;</span>
@@ -189,7 +193,7 @@ setter. So, for collections you are not need setter at all - only getter is nece
 <h5 id="ref">Ref</h5>
 <p>Allows to get reference to any another object by its <code>x:Id</code>:</p>
 <pre><code><span class="hljs-list">{Ref Ref=myObject}</span>
-или
+or
 <span class="hljs-list">{Ref myObject}</span>
 </code></pre><p>Forward-references are supported too (implementation is like in WPF - using fixup tokens).</p>
 <h5 id="type">Type</h5>
@@ -213,27 +217,17 @@ setter. So, for collections you are not need setter at all - only getter is nece
 <li>There are only one Data Context object passed to markup extension. In WPF it is resolved using current context because <code>DataContext</code> is Dependency property. So this constraint is because no dependencies properties support and to leave XAML concept simplified, not linked with UI concepts.</li>
 </ul>
 
-    </div>
-    <!-- /container -->
+    </div> <!-- /container -->
 
-    <!-- Le javascript
+
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/consoleframework/static/index.js"></script>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="/consoleframework/static/bootstrap/js/bootstrap.js"></script>
-    <!--<script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/consoleframework/static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
   </body>
 </html>
+
+

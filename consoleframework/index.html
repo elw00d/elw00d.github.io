@@ -1,158 +1,144 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-    <!-- Le styles -->
-    <link href="/consoleframework/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-    <link href="/consoleframework/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <title>Navbar Template for Bootstrap</title>
 
-    <!--<!-- HTML5 shim, for IE6-8 support of HTML5 elements &ndash;&gt;
+    <!-- Bootstrap core CSS -->
+    <link href="/consoleframework/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]&ndash;&gt;-->
-
-    <!--<!-- Fav and touch icons &ndash;&gt;
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/consoleframework">Console Framework</a>
-          <div class="nav-collapse collapse">
-			<ul class="nav">
-			  <li class="active"><a href="/consoleframework">Home</a></li>
-			  <li><a href="/consoleframework/downloads.html">Downloads</a></li>
-			  <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
-			  <li class="dropdown">
-				<a class="dropdown-toggle" href="#" data-toggle="dropdown">Docs <b class="caret"></b></a>
-				<ul class="dropdown-menu">
+    <div class="container">
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/consoleframework">Console Framework</a>
+          </div>
+		  <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/consoleframework">Home</a></li>
+              <li><a href="/consoleframework/downloads.html">Downloads</a></li>
+              <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
 				  <li><a href="/consoleframework/getting-started.html">Getting started</a></li>
 				  <li><a href="/consoleframework/build-from-sources.html">Building from sources</a></li>
 				  <li><a href="/consoleframework/examples.html">Examples</a></li>
 				  <li class="divider"></li>
+				  <li class="dropdown-header">Reference</li>
 				  <li><a href="/consoleframework/xaml.html">XAML reference</a></li>
 				  <li><a href="/consoleframework/binding.html">Data binding reference</a></li>
 				  <li><a href="/consoleframework/layout.html">Layout system reference</a></li>
 				  <li><a href="/consoleframework/custom-controls.html">Writing custom controls</a></li>
-				</ul>
-			  </li>
-			</ul>
+                </ul>
+              </li>
+            </ul>
+            <!--<ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="./">Default</a></li>
+              <li><a href="../navbar-static-top/">Static top</a></li>
+              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            </ul>-->
           </div><!--/.nav-collapse -->
-        </div>
+        </div><!--/.container-fluid -->
       </div>
-    </div>
 
-    <div class="container">
-            <!-- Main hero unit for a primary marketing message or call to action -->
-            <div class="hero-unit">
-                <h1>Console Framework</h1>
-
-                <p>Console framework is cross-platform toolkit that allows to develop TUI applications using C# and based on WPF-like concepts.</p>
-
-                <p><a href="#" class="btn btn-primary btn-large">Learn more</a></p>
-            </div>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="jumbotron">
+        <h1>Console Framework</h1>
+        <p>Console framework is cross-platform toolkit that allows to develop TUI applications using C# and based on WPF-like concepts.</p>
+        <p><a href="#" class="btn btn-primary btn-large">Learn more</a></p>
+      </div>
 
             <!-- Example row of columns -->
             <div class="row">
-                <div class="span4">
+                <div class="col-lg-4">
                     <h2>Declarative markup</h2>
 
                     <p>XAML support allows to design UI using the most productive way.</p>
 
-                    <p><a class="btn" href="#">View details</a></p>
+                    <p><a class="btn btn-primary" role="button" href="/consoleframework/xaml.html">View details &raquo;</a></p>
                 </div>
-                <div class="span4">
+                <div class="col-lg-4">
                     <h2>Data binding</h2>
 
                     <p>No boilerplate code! Define your bindings in XAML markup directly.</p>
 
-                    <p><a class="btn" href="#">View details</a></p>
+                    <p><a class="btn btn-primary" role="button" href="#">View details &raquo;</a></p>
                 </div>
-                <div class="span4">
+                <div class="col-lg-4">
                     <h2>Retained mode rendering system</h2>
 
                     <p>Solid rendering system is integrated into events loop. Routed events system is similar to WPF too.</p>
 
-                    <p><a class="btn" href="#">View details</a></p>
+                    <p><a class="btn btn-primary" role="button" href="#">View details &raquo;</a></p>
                 </div>
             </div>
 
             <div class="row">
-                <div class="span4">
+                <div class="col-lg-4">
                     <h2>WPF-compatible layout system</h2>
 
                     <p>Simple and flexible layout system with panels and end-controls. You can use standard
                         components or easily write custom one. <#--Each component is measured and arranged using WPF-compatible
               layout protocol, so you can use your experience in WPF to write your custom controls.--></p>
 
-                    <p><a class="btn" href="#">View details</a></p>
+                    <p><a class="btn btn-primary" role="button" href="#">View details &raquo;</a></p>
                 </div>
-                <div class="span4">
+                <div class="col-lg-4">
                     <h2>A lot of controls available</h2>
 
                     <p>For example: Grid, ScrollViewer, ListBox, ComboBox, TreeView</p>
 
-                    <p><a class="btn" href="#">View details</a></p>
+                    <p><a class="btn btn-primary" role="button" href="#">View details &raquo;</a></p>
                 </div>
-                <div class="span4">
+                <div class="col-lg-4">
                     <h2>Crossplatform</h2>
 
                     <p>Windows, Mac OS X and any Linux (32-bit or 64-bit) support</p>
 
-                    <p><a class="btn" href="#">View details</a></p>
+                    <p><a class="btn btn-primary" role="button" href="#">View details &raquo;</a></p>
                 </div>
             </div>
 
-        <hr>
+    </div> <!-- /container -->
 
-        <footer>
-            <p>&copy; elwood 2013</p>
-        </footer>
 
-    </div>
-    <!-- /container -->
-
-    <!-- Le javascript
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/consoleframework/static/index.js"></script>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="/consoleframework/static/bootstrap/js/bootstrap.js"></script>
-    <!--<script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/consoleframework/static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
   </body>
 </html>
+
+

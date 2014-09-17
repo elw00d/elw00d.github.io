@@ -1,73 +1,77 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Bootstrap, from Twitter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-    <!-- Le styles -->
-    <link href="/consoleframework/static/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-    <link href="/consoleframework/static/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <title>Navbar Template for Bootstrap</title>
 
-    <!--<!-- HTML5 shim, for IE6-8 support of HTML5 elements &ndash;&gt;
+    <!-- Bootstrap core CSS -->
+    <link href="/consoleframework/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]&ndash;&gt;-->
-
-    <!--<!-- Fav and touch icons &ndash;&gt;
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="../assets/ico/favicon.png">-->
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
 
   <body>
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="/consoleframework">Console Framework</a>
-          <div class="nav-collapse collapse">
-			<ul class="nav">
-			  <li><a href="/consoleframework">Home</a></li>
-			  <li><a href="/consoleframework/downloads.html">Downloads</a></li>
-			  <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
-			  <li class="dropdown">
-				<a class="active dropdown-toggle" href="#" data-toggle="dropdown">Docs <b class="caret"></b></a>
-				<ul class="dropdown-menu">
+    <div class="container">
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/consoleframework">Console Framework</a>
+          </div>
+		  <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/consoleframework">Home</a></li>
+              <li><a href="/consoleframework/downloads.html">Downloads</a></li>
+              <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
 				  <li><a href="/consoleframework/getting-started.html">Getting started</a></li>
 				  <li><a href="/consoleframework/build-from-sources.html">Building from sources</a></li>
 				  <li><a href="/consoleframework/examples.html">Examples</a></li>
 				  <li class="divider"></li>
+				  <li class="dropdown-header">Reference</li>
 				  <li><a href="/consoleframework/xaml.html">XAML reference</a></li>
 				  <li><a href="/consoleframework/binding.html">Data binding reference</a></li>
 				  <li><a href="/consoleframework/layout.html">Layout system reference</a></li>
 				  <li><a href="/consoleframework/custom-controls.html">Writing custom controls</a></li>
-				</ul>
-			  </li>
-			</ul>
+                </ul>
+              </li>
+            </ul>
+            <!--<ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="./">Default</a></li>
+              <li><a href="../navbar-static-top/">Static top</a></li>
+              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            </ul>-->
           </div><!--/.nav-collapse -->
-        </div>
+        </div><!--/.container-fluid -->
       </div>
-    </div>
 
-    <div class="container">
-	    <div class="row">
-	    	<div class="span3 bs-docs-sidebar">
+       <div class="row">
+	    	<div class="col-md-4 bs-docs-sidebar">
 	        <ul class="nav nav-list bs-docs-sidenav affix-top">
 	          <li class="active"><a href="#windows"><i class="icon-chevron-right"></i> In Windows</a></li>
 	          <li class=""><a href="#linux"><i class="icon-chevron-right"></i> In Linux & Mac OS X</a></li>
@@ -75,17 +79,16 @@
 	        </ul>
 	      </div>
 	    
-		    <div class="span9">
+		    <div class="col-md-8">
 		        <h1>How to build from sources</h1>
 		
-		        <hr>
 		        
 		        <section id="windows">
-		        	<div class="page-header">
-			        	<h1>In Windows</h1>
-			        </div>
+				<div class="page-header">
+			        <h2>In Windows</h2>
+					</div>
 			        
-			        <h2>Using Visual Studio</h2>
+			        <h4>Using Visual Studio</h4>
 			        
 			        <ol>
 			        	<li>Open <code>ConsoleFramework.sln</code></li>
@@ -93,7 +96,7 @@
 			        	<li>Select Build</li>
 			        </ol>
 			        
-			        <h2>Using nant</h2>
+			        <h4>Using nant</h4>
 			        
 			        <ol>
 			        	<li>Install <a href="http://nant.sourceforge.net/">nant</a></li>
@@ -103,10 +106,10 @@
 		        
 		        <section id="linux">
 		        	<div class="page-header">
-			        	<h1>In Linux/Mac OS X</h1>
+			        	<h2>In Linux/Mac OS X</h2>
 			        </div>
 			        
-			        <h2>Using MonoDevelop</h2>
+			        <h4>Using MonoDevelop</h4>
 			        
 			        <ol>
 			        	<li>Open <code>ConsoleFrameworkMono.sln</code> in MonoDevelop</li>
@@ -114,7 +117,7 @@
 			        	<li>Select Build</li>
 			        </ol>
 			        
-			        <h2>Using nant</h2>
+			        <h4>Using nant</h4>
 			        
 			        <ol>
 			        	<li>Install <a href="http://nant.sourceforge.net/">nant</a> for Mono (installing from sources is preferrable way, because of bug in latest binary release)</li>
@@ -124,7 +127,7 @@
 			        
 		        <section id="native">
 		        	<div class="page-header">
-			        	<h1>Native dependencies</h1>
+			        	<h2>Native dependencies</h2>
 			        </div>
 
 			        <p>In Windows there are no native dependencies. But in Linux and Mac OS X environments you should prepare some native dependencies to be able to execute examples. Dependencies are:</p>
@@ -162,27 +165,18 @@
 			</section>
 			</div>
 		</div>
-    </div>
-    <!-- /container -->
 
-    <!-- Le javascript
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/consoleframework/static/index.js"></script>
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="/consoleframework/static/bootstrap/js/bootstrap.js"></script>
-    <!--<script src="../assets/js/bootstrap-transition.js"></script>
-    <script src="../assets/js/bootstrap-alert.js"></script>
-    <script src="../assets/js/bootstrap-modal.js"></script>
-    <script src="../assets/js/bootstrap-dropdown.js"></script>
-    <script src="../assets/js/bootstrap-scrollspy.js"></script>
-    <script src="../assets/js/bootstrap-tab.js"></script>
-    <script src="../assets/js/bootstrap-tooltip.js"></script>
-    <script src="../assets/js/bootstrap-popover.js"></script>
-    <script src="../assets/js/bootstrap-button.js"></script>
-    <script src="../assets/js/bootstrap-collapse.js"></script>
-    <script src="../assets/js/bootstrap-carousel.js"></script>
-    <script src="../assets/js/bootstrap-typeahead.js"></script>-->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/consoleframework/static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
   </body>
 </html>
+
+
