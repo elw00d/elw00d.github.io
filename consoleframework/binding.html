@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Navbar Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/consoleframework/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--<script src="../../assets/js/ie-emulation-modes-warning.js"></script>-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <!-- Static navbar -->
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/consoleframework">Console Framework</a>
+          </div>
+		  <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/consoleframework">Home</a></li>
+              <li><a href="/consoleframework/downloads.html">Downloads</a></li>
+              <li><a href="https://github.com/elw00d/consoleframework">Github</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Docs <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+				  <li><a href="/consoleframework/getting-started.html">Getting started</a></li>
+				  <li><a href="/consoleframework/build-from-sources.html">Building from sources</a></li>
+				  <li><a href="/consoleframework/examples.html">Examples</a></li>
+				  <li class="divider"></li>
+				  <li class="dropdown-header">Reference</li>
+				  <li><a href="/consoleframework/xaml.html">XAML reference</a></li>
+				  <li><a href="/consoleframework/binding.html">Data binding reference</a></li>
+				  <li><a href="/consoleframework/layout.html">Layout system reference</a></li>
+				  <li><a href="/consoleframework/custom-controls.html">Writing custom controls</a></li>
+                </ul>
+              </li>
+            </ul>
+            <!--<ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="./">Default</a></li>
+              <li><a href="../navbar-static-top/">Static top</a></li>
+              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            </ul>-->
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </div>
+
+      <h1 id="binding-in-xaml">Binding in XAML</h1>
+<p>You can use XAML and Binding in XAML without Console Framework, in standalone application. To do this use need:</p>
+<ul>
+<li>Add reference to <code>Binding</code> project</li>
+<li>Copy to your project code of markup extensions in <em>ConsoleFramework.Xaml</em> (<code>BindingMarkupExtension</code> and <code>ConvertMarkupExtension</code>)</li>
+<li>When call <code>XamlParser.CreateObjectFromXaml()</code>, you should set up reference in <code>defaultNamespaces</code> to namespace you used
+for <code>BindingMarkupExtension</code> and <code>ConvertMarkupExtension</code> (Or you will need to connect them always manually in XAML).</li>
+<li>When call <code>XmlParser.CreateObjectFromXaml()</code>, you should pass <code>dataContext</code> - object, whose class is implementing
+<code>INotifyPropertyChanged</code> and notifies about changed properties. This object will be passed to markup extensions and
+they'll be able to bind to its properties.</li>
+</ul>
+<h2 id="examples-of-usage">Examples of usage</h2>
+<p>Simple two-way binding (TwoWay mode is default mode for objects implementing <code>INotifyPropertyChanged</code>):</p>
+<pre><code class="lang-xml">&lt;<span class="hljs-keyword">TextBox</span> <span class="hljs-keyword">Text</span>=<span class="hljs-string">"{Binding Path=Title}"</span>/&gt;
+</code></pre>
+<p>Binding for data flow from source to target only. DataContext object is always <em>Source</em>, so next markup
+demonstrates data flow from <code>dataContext</code> to <code>StatusBar</code>:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">StatusBar</span> <span class="hljs-attribute">Title</span>=<span class="hljs-value">"{Binding Path=GroupBoxTitle, Mode=OneWay}"</span>/&gt;</span>
+</code></pre>
+<p>If you need data to bind only one time in initialization, you can use <code>OneTime</code> mode - it works in same
+direction as <code>OneWay</code> works, but fires only when data binding is being set up:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">GroupBox</span> <span class="hljs-attribute">Title</span>=<span class="hljs-value">"{Binding Path=GroupBoxTitle, Mode=OneTime}"</span>/&gt;</span>
+</code></pre>
+<p>Also, when setting up a data binding, you can set converter to be used when data flows between <em>Source</em> and <em>Target</em>.
+Data binding converters differs from XAML converters used to assign values to properties. Data binding converters
+is designed for data binding exspecially and should implement <code>IBindingConverter</code> interface. Example:</p>
+<pre><code class="lang-xml"><span class="hljs-tag">&lt;<span class="hljs-title">StatusBar</span> <span class="hljs-attribute">Title</span>=<span class="hljs-value">"{Binding Path=StatusCode, Mode=OneWay, Converter={Ref converter}}"</span>/&gt;</span>
+</code></pre>
+<p>If you want to use XAML converter in bindings, you can write adapter for it, or add custom property to 
+<code>BindingMarkupExtension</code>. May be, it will be implemented out of the box in future versions.</p>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/consoleframework/static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
+  </body>
+</html>
+
+
