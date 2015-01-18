@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" href="favicon.png">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>Custom controls</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/consoleframework/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -70,26 +70,10 @@
         </div><!--/.container-fluid -->
       </div>
 
-      <h1 id="layout-system">Layout system</h1>
-<p>Layout system is similar to WPF layout system. If you are unfamiliar with it, visit <a href="http://msdn.microsoft.com/en-us/library/ms745058(v=vs.110).aspx">http://msdn.microsoft.com/en-us/library/ms745058(v=vs.110).aspx</a> and <a href="http://msdn.microsoft.com/en-us/library/bb613548(v=vs.110).aspx">http://msdn.microsoft.com/en-us/library/bb613548(v=vs.110).aspx</a> pages. Main differences from WPF are:</p>
-<ul>
-<li>No distinction between <code>ContentControls</code>, <code>ItemsControls</code> and so on. One base class is <code>Control</code>, and it can have 0, 1 or more children. All panels (<code>Panel</code>, <code>Grid</code>) inherit from <code>Control</code> too.</li>
-<li>No <code>UIElement</code> -&gt; <code>FrameworkElement</code> hierarchy. <code>Control</code> class is base class of all controls.</li>
-<li>No transforms (in console UI it is inactual)</li>
-<li>Many classes are missing (<code>DockPanel</code>, <code>WrapPanel</code>, <code>VirtualizingPanel</code> for instance)</li>
-</ul>
-<p>But measuring and arrangement protocol is the same. So, if you want to create a custom control, you should read about measure and arrange in WPF.</p>
-<h2 id="faq">FAQ</h2>
-<h3 id="q-how-to-write-a-control-that-will-use-all-available-space-">Q. How to write a control that will use all available space?</h3>
-<p>You can assume that if you override <code>MeasureOverride</code> to return availableSize unmodified it will be right solution. But it will not. The fact is <code>MeasureOverride</code> can be called with infinity argument. But according to layout contract <code>MeasureOverride</code> can't return infinity. We should do next things. In <code>MeasureOverride</code> our control should return minimal required size to render itself. In <code>ArrangeOverride</code> control should return <code>finalSize</code> (without any changes). And in <code>Render</code> method control should use <code>ActualWidth</code> and <code>ActualHeight</code> to render content (it is right way for <code>Render</code> method in any case). And after that in constructor we should set default <code>HorizontalAlignment</code> and <code>VerticalAlignment</code> to <code>Stretch</code>. </p>
-<p>How does it works ?</p>
-<ul>
-<li>Parent asks our control to determine desired size, control returns minimal required size</li>
-<li>If parent has slot greater than returned size (and our alignment is <code>Stretch</code>), it will pass to <code>ArrangeOverride</code> finalSize = all available space.</li>
-<li>Control returns finalSize without any modification</li>
-<li>In <code>Render</code> method our control uses provided size</li>
-</ul>
-<p><code>Button</code> for example uses this method. See in debugger if you are struggling with it.</p>
+      <h1>Writing custom controls</h1>
+
+	  <p>To write your own custom control you should inherit from base <code>Control</code> class and implement methods
+	   MeasureOverride, ArrangeOverride and Render</p>
 
     </div> <!-- /container -->
 
