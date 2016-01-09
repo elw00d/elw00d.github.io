@@ -115,6 +115,7 @@ button2<span class="hljs-preprocessor">.Caption</span> = <span class="hljs-strin
 panel<span class="hljs-preprocessor">.Children</span><span class="hljs-preprocessor">.Add</span>(button2)<span class="hljs-comment">;</span>
 
 window<span class="hljs-preprocessor">.Content</span> = panel<span class="hljs-comment">;</span>
+window.Created()<span class="hljs-comment">;</span>
 </code></pre><h2 id="content-properties-system">Content properties system</h2>
 <p>It is like in WPF. By default Content property name is <code>Content</code>. If you want to change this, you should mark class with <code>ContentPropertyAttribute</code> attribute:</p>
 <pre><code class="lang-csharp">[ContentProperty(<span class="hljs-string">"Controls"</span>)]
